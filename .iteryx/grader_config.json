@@ -1,0 +1,160 @@
+{
+  "schema": "iteryx/java-grader/v1",
+
+  "assignmentName": "Ch. 4 Challenge 3",
+
+  "project": {
+    "workingDirectory": ".",
+    "mainFile": "src/FileLetterCounter.java",
+    "mainClass": "FileLetterCounter",
+    "outputDirectory": ".iteryx/out",
+    "compileCommand": [
+      "javac",
+      "-d",
+      ".iteryx/out",
+      "src/FileLetterCounter.java"
+    ],
+    "runCommand": [
+      "java",
+      "-cp",
+      ".iteryx/out",
+      "FileLetterCounter"
+    ]
+  },
+
+  "settings": {
+    "compileTimeoutSeconds": 30,
+    "runTimeoutSeconds": 10,
+    "defaultCaseSensitive": false,
+    "defaultNormalizeWhitespace": true
+  },
+
+  "helpTopics": {
+    "scanner": {
+      "title": "Reading Keyboard Input",
+      "whereToLook": [
+        "Make sure you create a Scanner attached to System.in before you try to read anything from the keyboard.",
+        "Read the file name first, then read the letter, in the same order the prompts ask for them."
+      ]
+    },
+    "fileReading": {
+      "title": "Reading a File",
+      "whereToLook": [
+        "Use the file name the user typed to open the file, for example with FileReader and BufferedReader.",
+        "Read the file one line at a time in a loop, and stop when there are no more lines.",
+        "Close the file when you are done reading it."
+      ]
+    },
+    "letterCounting": {
+      "title": "Counting a Letter",
+      "whereToLook": [
+        "For each line, check every character one at a time to see if it matches the letter you are looking for.",
+        "Keep a counter variable that starts at 0 and increases by 1 every time you find a match.",
+        "Make sure the counter keeps its value across every line of the file, not just the last line."
+      ]
+    },
+    "caseSensitivity": {
+      "title": "Matching Letters Regardless of Case",
+      "whereToLook": [
+        "Convert both the letter the user typed and the text from the file to uppercase before comparing them.",
+        "Display the letter in your final message using the uppercase version."
+      ]
+    }
+  },
+
+  "sourceChecks": [
+    {
+      "name": "Uses Scanner",
+      "type": "regex",
+      "pattern": "\\bScanner\\b",
+      "points": 2,
+      "message": "This challenge requires you to use a Scanner to read the file name and letter from the user."
+    },
+    {
+      "name": "Reads from a file",
+      "type": "regex",
+      "pattern": "\\b(FileReader|BufferedReader|Files)\\b",
+      "points": 2,
+      "message": "This challenge requires you to actually open and read the file the user names, for example with FileReader and BufferedReader."
+    },
+    {
+      "name": "Uses a loop",
+      "type": "regex",
+      "pattern": "\\b(while|for)\\s*\\(",
+      "points": 2,
+      "message": "This challenge requires a loop to read through the lines of the file and another loop to check each character."
+    }
+  ],
+
+  "tests": [
+    {
+      "name": "Displays the file name prompt",
+      "input": "astronaut1.txt\nN\n",
+      "expectedOutput": "Please enter the name of the file.",
+      "comparison": "included",
+      "points": 1,
+      "message": "Your program should display the prompt \"Please enter the name of the file.\" before reading the file name."
+    },
+    {
+      "name": "Displays the letter prompt",
+      "input": "astronaut1.txt\nN\n",
+      "expectedOutput": "Enter a letter that you want counted.",
+      "comparison": "included",
+      "points": 1,
+      "message": "Your program should display the prompt \"Enter a letter that you want counted.\" before reading the letter."
+    },
+    {
+      "name": "Counts a repeated letter in astronaut1.txt",
+      "input": "astronaut1.txt\nN\n",
+      "expectedOutput": "The letter N appears 2 times in that file.",
+      "comparison": "included",
+      "points": 4,
+      "message": "astronaut1.txt contains \"Neil Armstrong\", which has 2 letter N's. Check that your program is actually opening the file and counting matches in it, and that your output format matches the sample in the README.",
+      "possibleErrors": [
+        {
+          "type": "expected_missing",
+          "message": "Check that you open the file named by the user, read every line, and count matching characters correctly."
+        }
+      ]
+    },
+    {
+      "name": "Matches letters regardless of case",
+      "input": "astronaut2.txt\nn\n",
+      "expectedOutput": "The letter N appears 3 times in that file.",
+      "comparison": "included",
+      "points": 4,
+      "message": "astronaut2.txt contains \"John Glenn\", which has 3 letter N's whether they are uppercase or lowercase. Make sure you convert both the file text and the entered letter to uppercase before comparing them, and display the uppercase letter in your result.",
+      "possibleErrors": [
+        {
+          "type": "hardcoded_output_hint",
+          "badText": "2 times",
+          "message": "Your output still shows the count from a different file and letter. Make sure you are reading the newly entered file name and letter rather than reusing a previous result."
+        }
+      ]
+    },
+    {
+      "name": "Counts a letter in a different file",
+      "input": "astronaut4.txt\nA\n",
+      "expectedOutput": "The letter A appears 3 times in that file.",
+      "comparison": "included",
+      "points": 4,
+      "message": "astronaut4.txt contains \"Alan Shepard\", which has 3 letter A's. Check that your program reads the file the user actually named instead of always reading the same file."
+    },
+    {
+      "name": "Reports zero when the letter is not found",
+      "input": "astronaut1.txt\nZ\n",
+      "expectedOutput": "The letter Z appears 0 times in that file.",
+      "comparison": "included",
+      "points": 3,
+      "message": "astronaut1.txt does not contain the letter Z at all. Your program should still display a result and report a count of 0 rather than skipping the message or crashing."
+    },
+    {
+      "name": "Counts a letter appearing more than once in a different file",
+      "input": "astronaut5.txt\nD\n",
+      "expectedOutput": "The letter D appears 2 times in that file.",
+      "comparison": "included",
+      "points": 2,
+      "message": "astronaut5.txt contains \"Chris Hadfield\", which has 2 letter D's. Double check your counting loop against a file you have not tested by hand yet."
+    }
+  ]
+}
