@@ -73,7 +73,7 @@
     {
       "name": "Reads from a file",
       "type": "regex",
-      "pattern": "\\b(FileReader|BufferedReader|Files)\\b",
+      "pattern": "\\b(File|FileReader|BufferedReader|Files)\\b",
       "points": 2,
       "message": "This challenge requires you to actually open and read the file the user names, for example with FileReader and BufferedReader."
     },
